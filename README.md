@@ -39,6 +39,13 @@ Reference-aligned + waveform-snapped result:
 - Timing-aware long-unit auto split
 - Desktop GUI (`tkinter`) and Python CLI/API usage
 
+## Release And Platform Status
+
+- Source code workflow: cross-platform (macOS / Windows / Linux) with Python + `ffmpeg`.
+- Current packaged GUI release: primarily macOS (`.app`).
+- Windows: source workflow is supported now; packaged Windows binary will be published in a later release.
+- If you only need automation/integration, use CLI/API directly from source.
+
 ## Installation
 
 ```bash

@@ -42,6 +42,13 @@
 - 时长/停顿感知的长句自动拆分
 - 同时支持 GUI（`tkinter`）与 CLI/API
 
+## Release 与平台状态
+
+- 源码工作流：跨平台可用（macOS / Windows / Linux），依赖 Python + `ffmpeg`。
+- 当前打包 GUI Release：以 macOS（`.app`）为主。
+- Windows：现阶段支持源码运行，独立打包版将在后续 Release 提供。
+- 如果你是做自动化或二次集成，建议直接使用 CLI/API。
+
 ## 安装
 
 ```bash
