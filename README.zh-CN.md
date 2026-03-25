@@ -42,6 +42,30 @@
 - 时长/停顿感知的长句自动拆分
 - 同时支持 GUI（`tkinter`）与 CLI/API
 
+## 双用法流程图（Pipeline Diagram）
+
+```mermaid
+flowchart TD
+    A[输入音频] --> B{是否有参考文稿?}
+    B -->|是: 模式 A| C[Whisper ASR 获取 token 时间]
+    C --> D[参考文稿对齐]
+    D --> E[标点优先分句]
+    E --> F[波形/VAD 边界吸附]
+    F --> G[长句自动拆分]
+    G --> H[对齐 SRT 输出]
+
+    B -->|否: 模式 B| I[Whisper ASR 转写]
+    I --> J[标点优先分句]
+    J --> K[波形/VAD 边界吸附]
+    K --> L[长句自动拆分]
+    L --> M[自动字幕 SRT 输出]
+
+    H --> N[可选质检: srt_stats.py / make_preview_mp4.py]
+    M --> N
+```
+
+这张图把两条主流程和共用的后处理/质检步骤放在同一个视图里，便于快速理解。
+
 ## Release 与平台状态
 
 - 源码工作流：跨平台可用（macOS / Windows / Linux），依赖 Python + `ffmpeg`。

@@ -39,6 +39,30 @@ Reference-aligned + waveform-snapped result:
 - Timing-aware long-unit auto split
 - Desktop GUI (`tkinter`) and Python CLI/API usage
 
+## Pipeline Diagram (Dual Mode)
+
+```mermaid
+flowchart TD
+    A[Input Audio] --> B{Reference Transcript Available?}
+    B -->|Yes: Mode A| C[Whisper ASR Token Timing]
+    C --> D[Reference Text Alignment]
+    D --> E[Punctuation-First Segmentation]
+    E --> F[Waveform/VAD Boundary Snapping]
+    F --> G[Long-Unit Auto Split]
+    G --> H[Aligned SRT Output]
+
+    B -->|No: Mode B| I[Whisper ASR Transcription]
+    I --> J[Punctuation-First Segmentation]
+    J --> K[Waveform/VAD Boundary Snapping]
+    K --> L[Long-Unit Auto Split]
+    L --> M[Auto SRT Output]
+
+    H --> N[Optional Check: srt_stats.py / make_preview_mp4.py]
+    M --> N
+```
+
+This diagram maps the two supported pipelines to the same post-processing and quality-check steps.
+
 ## Release And Platform Status
 
 - Source code workflow: cross-platform (macOS / Windows / Linux) with Python + `ffmpeg`.
