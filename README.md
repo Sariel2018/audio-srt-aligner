@@ -37,6 +37,7 @@ Reference-aligned + waveform-snapped result:
 - Unique-token anchors + segmented matcher for robust alignment
 - Waveform/VAD snapping for boundary refinement
 - Timing-aware long-unit auto split
+- Output text post-processing: remove commas/periods only for Chinese output (`zh`), keep other punctuation
 - Desktop GUI (`tkinter`) and Python CLI/API usage
 
 ## Pipeline Diagram (Dual Mode)

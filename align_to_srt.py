@@ -43,6 +43,8 @@ CJK_OR_WORD_PATTERN = re.compile(
     r"[\u4e00-\u9fff]|[A-Za-z0-9]+(?:'[A-Za-z0-9]+)?", re.UNICODE
 )
 PUNCT_BOUNDARY_PATTERN = re.compile(r"[。！？!?；;，,、：:]")
+REMOVE_COMMA_PERIOD_TABLE = str.maketrans("", "", ",.，。")
+CHINESE_LANGUAGE_CODES = {"yue", "cmn", "wuu", "gan", "hak", "nan", "hsn"}
 
 
 @dataclass
@@ -128,6 +130,28 @@ def tokenize(text: str) -> List[str]:
             token = token.lower()
         tokens.append(token)
     return tokens
+
+
+def remove_commas_and_periods(text: str) -> str:
+    return text.translate(REMOVE_COMMA_PERIOD_TABLE)
+
+
+def should_strip_commas_periods(language: Optional[str]) -> bool:
+    if not language:
+        return False
+    normalized = language.strip().lower().replace("_", "-")
+    if not normalized:
+        return False
+    if normalized.startswith("zh"):
+        return True
+    return normalized in CHINESE_LANGUAGE_CODES
+
+
+def format_subtitle_text(text: str, output_language: Optional[str]) -> str:
+    cleaned = text.strip()
+    if should_strip_commas_periods(output_language):
+        cleaned = remove_commas_and_periods(cleaned)
+    return cleaned
 
 
 def merge_short_units(units: Sequence[str], min_chars: int = 8) -> List[str]:
@@ -1007,6 +1031,7 @@ def write_srt(
     onset_lookahead: float,
     tail_end_guard: float,
     output_path: Path,
+    output_language: Optional[str] = None,
 ) -> int:
     # Stricter defaults: reduce subtitle display in silent edges.
     min_duration = 0.20
@@ -1082,7 +1107,7 @@ def write_srt(
 
         if end <= start:
             end = start + min_duration
-        text = unit.text.strip()
+        text = format_subtitle_text(unit.text, output_language=output_language)
         if not text:
             continue
         drafts.append(
@@ -1130,18 +1155,24 @@ def write_srt(
 def write_timed_entries_srt(
     entries: Sequence[TimedSubtitleEntry],
     output_path: Path,
+    output_language: Optional[str] = None,
 ) -> int:
     if not entries:
         output_path.write_text("", encoding="utf-8")
         return 0
 
+    written = 0
     with output_path.open("w", encoding="utf-8") as f:
-        for idx, entry in enumerate(entries, start=1):
-            f.write(f"{idx}\n")
+        for entry in entries:
+            text = format_subtitle_text(entry.text, output_language=output_language)
+            if not text:
+                continue
+            written += 1
+            f.write(f"{written}\n")
             f.write(f"{sec_to_srt_time(entry.start)} --> {sec_to_srt_time(entry.end)}\n")
-            f.write(f"{entry.text.strip()}\n\n")
+            f.write(f"{text}\n\n")
 
-    return len(entries)
+    return written
 
 
 def build_alignment_config(args: argparse.Namespace) -> AlignmentConfig:
@@ -1250,6 +1281,7 @@ def run_alignment_pipeline(
 
     if progress:
         progress("Writing SRT...")
+    output_language = detected_language or config.language
     written = write_srt(
         units=refined_units,
         token_times=token_times,
@@ -1264,6 +1296,7 @@ def run_alignment_pipeline(
         onset_lookahead=config.onset_lookahead,
         tail_end_guard=config.tail_end_guard,
         output_path=output_path,
+        output_language=output_language,
     )
 
     aligned = sum(1 for item in ref_to_asr if item is not None)
@@ -1333,6 +1366,7 @@ def run_auto_subtitle_pipeline(
     written = write_timed_entries_srt(
         entries=refined_entries,
         output_path=output_path,
+        output_language=(detected_language or config.language),
     )
     detected = detected_language or "unknown"
     if progress:
