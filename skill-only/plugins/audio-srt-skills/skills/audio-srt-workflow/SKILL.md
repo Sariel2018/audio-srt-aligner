@@ -10,7 +10,15 @@ metadata:
 
 # Audio SRT Workflow
 
-Use this skill for end-to-end subtitle work in this repository.
+Use this skill for end-to-end subtitle work.
+
+This package is self-contained for runtime entrypoints:
+
+- `scripts/align_to_srt.py`
+- `scripts/gui_app.py`
+- `scripts/srt_stats.py`
+- `scripts/make_preview_mp4.py`
+- `scripts/requirements.txt`
 
 ## Scope
 
@@ -36,9 +44,25 @@ Use this skill for end-to-end subtitle work in this repository.
 
 1. Validate environment and paths.
 2. Choose Mode A or Mode B by transcript availability.
-3. Run subtitle generation.
+3. Run subtitle generation from packaged scripts.
 4. Run timing diagnostics (`srt_stats.py`).
 5. If needed, render a preview mp4 with burned subtitles.
+
+## Resolve Skill Script Path
+
+Set a local variable to your installed skill directory.
+
+Codex default path:
+
+```bash
+SKILL_DIR="${CODEX_HOME:-$HOME/.codex}/skills/audio-srt-workflow"
+```
+
+OpenClaw/ClawHub install path example:
+
+```bash
+SKILL_DIR="<your-workdir>/skills/audio-srt-workflow"
+```
 
 ## Environment Checks
 
@@ -53,13 +77,13 @@ python3 -c "import faster_whisper; print('ok')"
 If `faster-whisper` import fails:
 
 ```bash
-pip install -r requirements.txt
+pip install -r "$SKILL_DIR/scripts/requirements.txt"
 ```
 
 ## Mode A Command Template (Audio + Transcript)
 
 ```bash
-python3 align_to_srt.py \
+python3 "$SKILL_DIR/scripts/align_to_srt.py" \
   --audio "<input_audio>" \
   --text "<transcript_txt>" \
   --output "<output_srt>" \
@@ -72,7 +96,7 @@ python3 align_to_srt.py \
 GUI:
 
 ```bash
-python3 gui_app.py
+python3 "$SKILL_DIR/scripts/gui_app.py"
 ```
 
 Or use Python API in scripts:
@@ -87,13 +111,13 @@ See command details in `references/command-templates.md`.
 Timing stats:
 
 ```bash
-python3 srt_stats.py --srt "<output_srt>"
+python3 "$SKILL_DIR/scripts/srt_stats.py" --srt "<output_srt>"
 ```
 
 Preview video:
 
 ```bash
-python3 make_preview_mp4.py \
+python3 "$SKILL_DIR/scripts/make_preview_mp4.py" \
   --audio "<input_audio>" \
   --srt "<output_srt>" \
   --output "<preview_mp4>"
