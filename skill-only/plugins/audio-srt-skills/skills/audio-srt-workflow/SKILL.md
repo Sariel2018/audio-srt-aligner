@@ -77,6 +77,8 @@ python3 -c "import faster_whisper; print('ok')"
 If `faster-whisper` import fails:
 
 ```bash
+# Review dependencies before installing:
+cat "$SKILL_DIR/scripts/requirements.txt"
 pip install -r "$SKILL_DIR/scripts/requirements.txt"
 ```
 
@@ -133,3 +135,4 @@ python3 "$SKILL_DIR/scripts/make_preview_mp4.py" \
 
 - For Chinese output (`zh`), the pipeline strips commas/periods only.
 - If timings look off, inspect waveform snap related arguments before changing model size.
+- This skill requires explicit invocation (`allow_implicit_invocation: false`).
