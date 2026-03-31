@@ -14,6 +14,8 @@ SKILL_DIR="${CODEX_HOME:-$HOME/.codex}/skills/audio-srt-workflow"
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
+# Review dependencies first:
+cat "$SKILL_DIR/scripts/requirements.txt"
 pip install -r "$SKILL_DIR/scripts/requirements.txt"
 ```
 
