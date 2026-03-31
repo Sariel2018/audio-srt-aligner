@@ -10,6 +10,9 @@
 
 核心差异点：文稿感知对齐 + 波形/VAD 边界修正，相比纯 ASR 时间轴更稳。
 
+> 已于 2026-03-31 实测：可作为 Agent Skill（Codex / Claude Code / OpenClaw）安装，一条命令接入，并通过端到端 smoke 测试（token 对齐率 91.8%）。
+> 本项目已打包为可复用 Agent Skill，便于各类 Agent 直接调用并执行稳定的字幕对齐流程。
+
 ## 为什么做这个项目
 
 纯 ASR 输出通常还要大量手工改时间轴，尤其在你已经有较干净文稿时，常见问题是：
@@ -45,9 +48,11 @@
 
 ## 作为 Agent Skill 使用
 
-本仓库已内置可复用 Skill：
+本仓库已完成 Skill 打包，可供 Agent 直接调用：
 
 - `skills/audio-srt-workflow`
+
+该 Skill 面向真实字幕对齐场景，重点解决“文稿与时间轴不一致、起止点不稳”等问题。
 
 ### Codex
 

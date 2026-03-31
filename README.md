@@ -10,6 +10,9 @@ Workflows:
 
 Core differentiator: transcript-aware alignment with waveform/VAD boundary snapping for more stable timing than plain ASR-only pipelines.
 
+> Verified on March 31, 2026: installable as an Agent Skill (Codex / Claude Code / OpenClaw) with one-command setup and a passing end-to-end smoke run (91.8% token alignment).
+> This project is now packaged as a reusable Agent Skill, so agents can call it directly to execute reliable subtitle alignment workflows.
+
 ## Why This Project
 
 Plain ASR subtitles often need heavy manual timing fixes, especially when you already have a cleaned script.
@@ -42,9 +45,11 @@ Reference-aligned + waveform-snapped result:
 
 ## Use As Agent Skill
 
-This repository includes a reusable Agent Skill:
+This repository has been packaged as a reusable Agent Skill for direct agent invocation:
 
 - `skills/audio-srt-workflow`
+
+It is designed to solve practical subtitle alignment issues with transcript-aware timing and waveform/VAD boundary snapping.
 
 ### Codex
 
