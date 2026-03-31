@@ -95,7 +95,7 @@ Publish this skill to ClawHub:
 ```bash
 npm i -g clawhub
 clawhub login
-clawhub skill publish ./skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow \
+clawhub publish ./skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow \
   --slug audio-srt-workflow \
   --name "Audio SRT Workflow" \
   --version 0.1.0 \
