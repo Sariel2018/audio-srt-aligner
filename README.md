@@ -48,13 +48,18 @@ This repository includes a reusable Agent Skill:
 
 ### Codex
 
-Install from GitHub with the built-in installer:
+Install from GitHub with the built-in installer.
+Recommended lightweight branch URL:
 
 ```text
 $skill-installer install https://github.com/Sariel2018/audio-srt-aligner/tree/skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow
 ```
 
-This URL targets the lightweight `skill-only` branch.
+Alternative URL from `main` branch path:
+
+```text
+$skill-installer install https://github.com/Sariel2018/audio-srt-aligner/tree/main/skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow
+```
 
 Restart Codex after installation.
 
@@ -85,6 +90,16 @@ Or publish to ClawHub and install by slug:
 ```bash
 clawhub install <your-skill-slug>
 ```
+
+### Verification Snapshot (March 31, 2026)
+
+- Codex install command was tested with both URLs above.
+- Installed skill payload contained exactly: `SKILL.md`, `agents/openai.yaml`, `references/command-templates.md`.
+- End-to-end smoke run (Mode A) was executed with:
+  - audio: one sample audio file under `sample/`
+  - transcript: matching transcript file under `sample/`
+  - output: `sample/skill_smoke_20260331.srt`
+- Smoke result: aligned tokens `3036/3307 (91.8%)`, SRT entries `211`.
 
 ## Pipeline Diagram (Dual Mode)
 

@@ -52,12 +52,17 @@
 ### Codex
 
 可通过内置安装器从 GitHub 直接安装：
+推荐轻量分支 URL：
 
 ```text
 $skill-installer install https://github.com/Sariel2018/audio-srt-aligner/tree/skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow
 ```
 
-该 URL 指向轻量分支 `skill-only`。
+`main` 分支路径也可安装：
+
+```text
+$skill-installer install https://github.com/Sariel2018/audio-srt-aligner/tree/main/skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow
+```
 
 安装后重启 Codex 生效。
 
@@ -88,6 +93,16 @@ cp -R skills/audio-srt-workflow ~/.openclaw/skills/
 ```bash
 clawhub install <your-skill-slug>
 ```
+
+### 当前验证快照（2026-03-31）
+
+- 上面两条 Codex 安装 URL 均已实测通过。
+- 安装得到的 skill 载荷仅包含：`SKILL.md`、`agents/openai.yaml`、`references/command-templates.md`。
+- 已执行一轮端到端 smoke 测试（模式 A）：
+  - 音频：`sample/` 目录中的一个样例音频
+  - 文稿：对应的样例文本稿
+  - 输出：`sample/skill_smoke_20260331.srt`
+- 测试结果：对齐 token `3036/3307 (91.8%)`，SRT 条目 `211`。
 
 ## 双用法流程图（Pipeline Diagram）
 
