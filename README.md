@@ -14,9 +14,17 @@ Recommended lightweight branch URL:
 https://github.com/Sariel2018/audio-srt-aligner/tree/skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow
 ```
 
+Alternative URL from `main` branch path:
+
+```text
+https://github.com/Sariel2018/audio-srt-aligner/tree/main/skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow
+```
+
 In the `main` branch tree, this path is:
 
 - `skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow`
+
+Both URLs above were verified on March 31, 2026 with Codex skill installer.
 
 ## Claude marketplace plugin source
 
