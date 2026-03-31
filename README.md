@@ -40,6 +40,50 @@ Reference-aligned + waveform-snapped result:
 - Output text post-processing: remove commas/periods only for Chinese output (`zh`), keep other punctuation
 - Desktop GUI (`tkinter`) and Python CLI/API usage
 
+## Use As Agent Skill
+
+This repository includes a reusable Agent Skill:
+
+- `skills/audio-srt-workflow`
+
+### Codex
+
+Install from GitHub with the built-in installer:
+
+```text
+$skill-installer install https://github.com/Sariel2018/audio-srt-aligner/tree/main/skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow
+```
+
+Restart Codex after installation.
+
+### Claude Code
+
+This repository also includes `.claude-plugin/marketplace.json` for plugin-based distribution:
+
+```text
+/plugin marketplace add Sariel2018/audio-srt-aligner
+/plugin install audio-srt-skills@audio-srt-marketplace
+```
+
+The marketplace points to the lightweight plugin directory (`skill-only/plugins/audio-srt-skills`) so plugin payloads do not include large sample assets.
+
+Then ask Claude Code to use `audio-srt-workflow` for subtitle tasks.
+
+### OpenClaw
+
+Install as a local shared skill:
+
+```bash
+mkdir -p ~/.openclaw/skills
+cp -R skills/audio-srt-workflow ~/.openclaw/skills/
+```
+
+Or publish to ClawHub and install by slug:
+
+```bash
+clawhub install <your-skill-slug>
+```
+
 ## Pipeline Diagram (Dual Mode)
 
 ```mermaid
@@ -214,6 +258,9 @@ python3 make_preview_mp4.py \
 - `gui_app.py`: desktop GUI entrypoint
 - `srt_stats.py`: SRT timing diagnostics
 - `make_preview_mp4.py`: quick preview video generation
+- `skills/audio-srt-workflow/`: reusable Agent Skill package
+- `skill-only/`: lightweight distribution pack for skill/plugin installation
+- `.claude-plugin/marketplace.json`: Claude Code marketplace manifest
 - `docs/images/`: README images
 
 ## License

@@ -1,0 +1,21 @@
+{
+  "name": "audio-srt-marketplace",
+  "owner": {
+    "name": "Sariel2018"
+  },
+  "metadata": {
+    "description": "Audio subtitle generation and alignment skills",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "audio-srt-skills",
+      "description": "Dual-mode audio subtitle generation and transcript alignment skills",
+      "source": "./skill-only/plugins/audio-srt-skills",
+      "strict": false,
+      "skills": [
+        "./skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow"
+      ]
+    }
+  ]
+}

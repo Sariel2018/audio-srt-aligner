@@ -43,6 +43,50 @@
 - 输出文本后处理：仅在中文输出（`zh`）时删除逗号和句号（`, . ， 。`），保留其他标点
 - 同时支持 GUI（`tkinter`）与 CLI/API
 
+## 作为 Agent Skill 使用
+
+本仓库已内置可复用 Skill：
+
+- `skills/audio-srt-workflow`
+
+### Codex
+
+可通过内置安装器从 GitHub 直接安装：
+
+```text
+$skill-installer install https://github.com/Sariel2018/audio-srt-aligner/tree/main/skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow
+```
+
+安装后重启 Codex 生效。
+
+### Claude Code
+
+仓库内已提供基于插件市场的分发清单 `.claude-plugin/marketplace.json`：
+
+```text
+/plugin marketplace add Sariel2018/audio-srt-aligner
+/plugin install audio-srt-skills@audio-srt-marketplace
+```
+
+该 marketplace 指向轻量目录 `skill-only/plugins/audio-srt-skills`，安装插件时不会把仓库里的大样例文件带入插件载荷。
+
+安装后可在任务中直接要求 Claude Code 使用 `audio-srt-workflow`。
+
+### OpenClaw
+
+可作为本地共享 Skill 安装：
+
+```bash
+mkdir -p ~/.openclaw/skills
+cp -R skills/audio-srt-workflow ~/.openclaw/skills/
+```
+
+也可以发布到 ClawHub 后按 slug 安装：
+
+```bash
+clawhub install <your-skill-slug>
+```
+
 ## 双用法流程图（Pipeline Diagram）
 
 ```mermaid
@@ -217,6 +261,9 @@ python3 make_preview_mp4.py \
 - `gui_app.py`：桌面 GUI 入口
 - `srt_stats.py`：SRT 时序统计工具
 - `make_preview_mp4.py`：预览视频生成工具
+- `skills/audio-srt-workflow/`：可复用 Agent Skill 包
+- `skill-only/`：用于分发安装的轻量目录
+- `.claude-plugin/marketplace.json`：Claude Code 市场清单
 - `docs/images/`：README 示例图片
 
 ## 许可证

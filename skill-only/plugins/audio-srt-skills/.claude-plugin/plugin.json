@@ -1,0 +1,5 @@
+{
+  "name": "audio-srt-skills",
+  "description": "Dual-mode audio subtitle generation and transcript alignment skills",
+  "version": "0.1.0"
+}
