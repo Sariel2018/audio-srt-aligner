@@ -33,3 +33,15 @@ The root `.claude-plugin/marketplace.json` points to:
 - `./skill-only/plugins/audio-srt-skills`
 
 This avoids shipping repository-wide sample files into installed plugin payloads.
+
+## ClawHub publish (OpenClaw)
+
+```bash
+npm i -g clawhub
+clawhub login
+clawhub skill publish ./skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow \
+  --slug audio-srt-workflow \
+  --name "Audio SRT Workflow" \
+  --version 0.1.0 \
+  --tags latest
+```

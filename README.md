@@ -90,11 +90,27 @@ mkdir -p ~/.openclaw/skills
 cp -R skills/audio-srt-workflow ~/.openclaw/skills/
 ```
 
-Or publish to ClawHub and install by slug:
+Publish this skill to ClawHub:
 
 ```bash
+npm i -g clawhub
+clawhub login
+clawhub skill publish ./skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow \
+  --slug audio-srt-workflow \
+  --name "Audio SRT Workflow" \
+  --version 0.1.0 \
+  --tags latest
+```
+
+Install from ClawHub by slug:
+
+```bash
+openclaw skills install <your-skill-slug>
+# or
 clawhub install <your-skill-slug>
 ```
+
+Note: this repository currently ships a compatible skill/bundle layout for OpenClaw consumption. Native runtime plugins (`openclaw.plugin.json` + runtime module) are optional for this use case.
 
 ### Verification Snapshot (March 31, 2026)
 
