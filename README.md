@@ -51,8 +51,10 @@ This repository includes a reusable Agent Skill:
 Install from GitHub with the built-in installer:
 
 ```text
-$skill-installer install https://github.com/Sariel2018/audio-srt-aligner/tree/main/skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow
+$skill-installer install https://github.com/Sariel2018/audio-srt-aligner/tree/skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow
 ```
+
+This URL targets the lightweight `skill-only` branch.
 
 Restart Codex after installation.
 

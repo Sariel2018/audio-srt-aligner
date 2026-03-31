@@ -8,7 +8,13 @@ Contents:
 
 ## Codex install target
 
-Use this path in installer URLs:
+Recommended lightweight branch URL:
+
+```text
+https://github.com/Sariel2018/audio-srt-aligner/tree/skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow
+```
+
+In the `main` branch tree, this path is:
 
 - `skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow`
 

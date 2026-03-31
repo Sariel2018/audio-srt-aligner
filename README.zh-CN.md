@@ -54,8 +54,10 @@
 可通过内置安装器从 GitHub 直接安装：
 
 ```text
-$skill-installer install https://github.com/Sariel2018/audio-srt-aligner/tree/main/skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow
+$skill-installer install https://github.com/Sariel2018/audio-srt-aligner/tree/skill-only/plugins/audio-srt-skills/skills/audio-srt-workflow
 ```
+
+该 URL 指向轻量分支 `skill-only`。
 
 安装后重启 Codex 生效。
 
